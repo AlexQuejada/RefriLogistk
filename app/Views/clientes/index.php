@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>
+        <i class="fas fa-users"></i> Clientes
+    </h1>
+    <a href="/RefriLogistik/public/clientes/nuevo" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Nuevo Cliente
+    </a>
+</div>
+
+<?php if (empty($clientes)): ?>
+    <!-- Mensaje cuando NO hay clientes -->
+    <div class="alert alert-info text-center">
+        <i class="fas fa-info-circle"></i> No hay clientes registrados.
+        <a href="/RefriLogistik/public/clientes/nuevo" class="alert-link">
+            Agrega tu primer cliente
+        </a>
+    </div>
+<?php else: ?>
+    <!-- Tabla de clientes -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($clientes as $cliente): ?>
+                <tr>
+                    <td><?= $cliente['id'] ?></td>
+                    <td><?= htmlspecialchars($cliente['nombre']) ?></td>
+                    <td><?= htmlspecialchars($cliente['telefono'] ?: '-') ?></td>
+                    <td><?= htmlspecialchars($cliente['email'] ?: '-') ?></td>
+                    <td class="table-actions">
+                        <!-- Botón Ver -->
+                        <a href="/RefriLogistik/public/clientes/ver/<?= $cliente['id'] ?>" 
+                           class="btn btn-sm btn-info" title="Ver">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <!-- Botón Editar -->
+                        <a href="/RefriLogistik/public/clientes/editar/<?= $cliente['id'] ?>" 
+                           class="btn btn-sm btn-warning" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <!-- Botón Eliminar -->
+                        <a href="/RefriLogistik/public/clientes/eliminar/<?= $cliente['id'] ?>" 
+                           class="btn btn-sm btn-danger" title="Eliminar"
+                           onclick="return confirm('¿Eliminar este cliente? También se borrarán sus órdenes.')">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>

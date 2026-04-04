@@ -1,0 +1,5 @@
+/logs/
+/public/assets/uploads/
+/vendor/
+.env
+node_modules
