@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= $activePage === 'ordenes' ? 'active' : '' ?>" href="#">
+                    <a class="sidebar-link <?= $activePage === 'ordenes' ? 'active' : '' ?>" href="/RefriLogistk/public/ordenes">
                         <i class="fas fa-tools"></i>
                         <span>Órdenes de Servicio</span>
                     </a>

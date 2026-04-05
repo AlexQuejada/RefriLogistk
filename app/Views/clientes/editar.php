@@ -33,3 +33,44 @@
         </div>
     </div>
 </div>
+<?php $activePage = 'clientes'; ?>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h4 class="mb-0"><i class="fas fa-edit"></i> Editar Orden de Servicio</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Cliente:</strong> <?= htmlspecialchars($cliente['nombre']) ?></p>
+                <hr>
+                
+                <form action="/RefriLogistk/public/ordenes/actualizar/<?= $orden['id'] ?>" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Descripción del trabajo</label>
+                        <textarea name="descripcion" class="form-control" rows="3" required><?= htmlspecialchars($orden['descripcion']) ?></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" name="fecha" class="form-control" value="<?= $orden['fecha'] ?>" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Costo ($)</label>
+                        <input type="number" step="0.01" name="costo" class="form-control" value="<?= $orden['costo'] ?>">
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="/RefriLogistk/public/clientes/ver/<?= $cliente['id'] ?>" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Actualizar Orden
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@
 </div>
 
 <?php if (empty($clientes)): ?>
-    <!-- Mensaje cuando NO hay clientes -->
+
     <div class="alert alert-info text-center">
         <i class="fas fa-info-circle"></i> No hay clientes registrados.
         <a href="/RefriLogistk/public/clientes/nuevo" class="alert-link">
@@ -16,7 +16,7 @@
         </a>
     </div>
 <?php else: ?>
-    <!-- Tabla de clientes -->
+
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="table-dark">
@@ -36,17 +36,17 @@
                     <td><?= htmlspecialchars($cliente['telefono'] ?: '-') ?></td>
                     <td><?= htmlspecialchars($cliente['email'] ?: '-') ?></td>
                     <td class="table-actions">
-                        <!-- Botón Ver -->
+
                         <a href="/RefriLogistk/public/clientes/ver/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-info" title="Ver">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <!-- Botón Editar -->
+
                         <a href="/RefriLogistk/public/clientes/editar/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-warning" title="Editar">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <!-- Botón Eliminar -->
+
                         <a href="/RefriLogistk/public/clientes/eliminar/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-danger" title="Eliminar"
                            onclick="return confirm('¿Eliminar este cliente? También se borrarán sus órdenes.')">

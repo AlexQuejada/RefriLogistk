@@ -15,9 +15,7 @@ abstract class Model
         $this->db = Database::getInstance()->getConnection();
     }
 
-    /**
-     * Obtener todos los registros
-     */
+    /* Obtener todos los registros*/
     public function all($orderBy = 'id DESC')
     {
         $sql = "SELECT * FROM {$this->table} ORDER BY {$orderBy}";
@@ -25,9 +23,7 @@ abstract class Model
         return $stmt->fetchAll();
     }
 
-    /**
-     * Buscar por ID
-     */
+    /* Buscar por ID*/
     public function find($id)
     {
         $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
@@ -36,9 +32,7 @@ abstract class Model
         return $stmt->fetch();
     }
 
-    /**
-     * Eliminar por ID
-     */
+    /* Eliminar por ID*/
     public function delete($id)
     {
         $sql = "DELETE FROM {$this->table} WHERE id = :id";
@@ -46,9 +40,7 @@ abstract class Model
         return $stmt->execute([':id' => $id]);
     }
 
-    /**
-     * Consulta personalizada con bindings
-     */
+    /* Consulta personalizada con bindings*/
     protected function query($sql, $params = [])
     {
         $stmt = $this->db->prepare($sql);
