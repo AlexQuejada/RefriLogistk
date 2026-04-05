@@ -4,26 +4,40 @@ namespace Core;
 
 abstract class Controller
 {
-    /**
-     * Redirigir a otra URL
-     */
+    
     protected function redirect($url)
     {
         header("Location: {$url}");
         exit;
     }
 
-    /**
-     * Renderizar una vista
-     */
+    
     protected function view($viewPath, $data = [])
     {
-        // Extraer variables para que estén disponibles en la vista
+        
         extract($data);
         
-        // Incluir layout y vista
-        require_once __DIR__ . "/../Views/layout/header.php";
-        require_once __DIR__ . "/../Views/{$viewPath}.php";
-        require_once __DIR__ . "/../Views/layout/footer.php";
+
+        $headerFile = __DIR__ . "/../Views/layout/header.php";
+        $viewFile = __DIR__ . "/../Views/{$viewPath}.php";
+        $footerFile = __DIR__ . "/../Views/layout/footer.php";
+        
+
+        if (!file_exists($headerFile)) {
+            die(" ERROR: No se encuentra header.php en: " . $headerFile);
+        }
+        
+        if (!file_exists($viewFile)) {
+            die(" ERROR: No se encuentra la vista: " . $viewFile);
+        }
+        
+        if (!file_exists($footerFile)) {
+            die(" ERROR: No se encuentra footer.php en: " . $footerFile);
+        }
+        
+
+        require_once $headerFile;
+        require_once $viewFile;
+        require_once $footerFile;
     }
 }

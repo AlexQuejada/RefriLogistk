@@ -49,17 +49,17 @@ class ClienteController extends Controller
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
 
         $result = $this->clienteModel->create($_POST);
         
         if ($result) {
             $_SESSION['success'] = 'Cliente creado exitosamente';
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         } else {
             $_SESSION['error'] = 'Error al crear el cliente';
-            $this->redirect('/clientes/nuevo');
+            $this->redirect('/RefriLogistk/public/clientes/nuevo');
         }
     }
 
@@ -73,7 +73,7 @@ class ClienteController extends Controller
         
         if (!$cliente) {
             $_SESSION['error'] = 'Cliente no encontrado';
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
         
         $ordenes = $this->ordenModel->getByCliente($id);
@@ -95,7 +95,7 @@ class ClienteController extends Controller
         
         if (!$cliente) {
             $_SESSION['error'] = 'Cliente no encontrado';
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
         
         $this->view('clientes/editar', [
@@ -111,17 +111,17 @@ class ClienteController extends Controller
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
 
         $result = $this->clienteModel->update($id, $_POST);
         
         if ($result) {
             $_SESSION['success'] = 'Cliente actualizado exitosamente';
-            $this->redirect("/clientes/ver/{$id}");
+            $this->redirect("/RefriLogistk/public/clientes/ver/{$id}");
         } else {
             $_SESSION['error'] = 'Error al actualizar el cliente';
-            $this->redirect("/clientes/editar/{$id}");
+            $this->redirect("/RefriLogistk/public/clientes/editar/{$id}");
         }
     }
 
@@ -139,7 +139,7 @@ class ClienteController extends Controller
             $_SESSION['error'] = 'Error al eliminar el cliente';
         }
         
-        $this->redirect('/clientes');
+        $this->redirect('/RefriLogistk/public/clientes');
     }
 
     /**
@@ -149,7 +149,7 @@ class ClienteController extends Controller
     public function storeOrden()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
 
         $result = $this->ordenModel->create($_POST);
@@ -160,7 +160,7 @@ class ClienteController extends Controller
             $_SESSION['error'] = 'Error al agregar la orden';
         }
         
-        $this->redirect("/clientes/ver/{$_POST['cliente_id']}");
+        $this->redirect("/RefriLogistk/public/clientes/ver/{$_POST['cliente_id']}");
     }
 
     /**
@@ -181,10 +181,10 @@ class ClienteController extends Controller
                 $_SESSION['error'] = 'Error al eliminar la orden';
             }
             
-            $this->redirect("/clientes/ver/{$clienteId}");
+            $this->redirect("/RefriLogistk/public/clientes/ver/{$clienteId}");
         } else {
             $_SESSION['error'] = 'Orden no encontrada';
-            $this->redirect('/clientes');
+            $this->redirect('/RefriLogistk/public/clientes');
         }
     }
 }

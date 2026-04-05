@@ -9,7 +9,7 @@ class Database
     {
         return [
             'host' => 'localhost',
-            'dbname' => 'refrites_db',
+            'dbname' => 'refrites',
             'user' => 'root',
             'pass' => '',
             'charset' => 'utf8mb4',

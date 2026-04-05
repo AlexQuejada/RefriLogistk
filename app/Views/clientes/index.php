@@ -2,7 +2,7 @@
     <h1>
         <i class="fas fa-users"></i> Clientes
     </h1>
-    <a href="/RefriLogistik/public/clientes/nuevo" class="btn btn-primary">
+    <a href="/RefriLogistk/public/clientes/nuevo" class="btn btn-primary">
         <i class="fas fa-plus"></i> Nuevo Cliente
     </a>
 </div>
@@ -11,7 +11,7 @@
     <!-- Mensaje cuando NO hay clientes -->
     <div class="alert alert-info text-center">
         <i class="fas fa-info-circle"></i> No hay clientes registrados.
-        <a href="/RefriLogistik/public/clientes/nuevo" class="alert-link">
+        <a href="/RefriLogistk/public/clientes/nuevo" class="alert-link">
             Agrega tu primer cliente
         </a>
     </div>
@@ -37,17 +37,17 @@
                     <td><?= htmlspecialchars($cliente['email'] ?: '-') ?></td>
                     <td class="table-actions">
                         <!-- Botón Ver -->
-                        <a href="/RefriLogistik/public/clientes/ver/<?= $cliente['id'] ?>" 
+                        <a href="/RefriLogistk/public/clientes/ver/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-info" title="Ver">
                             <i class="fas fa-eye"></i>
                         </a>
                         <!-- Botón Editar -->
-                        <a href="/RefriLogistik/public/clientes/editar/<?= $cliente['id'] ?>" 
+                        <a href="/RefriLogistk/public/clientes/editar/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-warning" title="Editar">
                             <i class="fas fa-edit"></i>
                         </a>
                         <!-- Botón Eliminar -->
-                        <a href="/RefriLogistik/public/clientes/eliminar/<?= $cliente['id'] ?>" 
+                        <a href="/RefriLogistk/public/clientes/eliminar/<?= $cliente['id'] ?>" 
                            class="btn btn-sm btn-danger" title="Eliminar"
                            onclick="return confirm('¿Eliminar este cliente? También se borrarán sus órdenes.')">
                             <i class="fas fa-trash"></i>
