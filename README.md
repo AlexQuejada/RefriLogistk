@@ -27,14 +27,20 @@ El proyecto sigue una estructura MVC básica:
 
 app/
  ├── Config
+ 
  ├── Controllers
+ 
  ├── Core
+ 
  ├── Models
+ 
  └── Views
 
 public/
  ├── css
+ 
  ├── js
+ 
  └── index.php
  
 Módulos implementados
