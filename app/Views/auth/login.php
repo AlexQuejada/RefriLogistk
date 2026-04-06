@@ -50,11 +50,6 @@
             
             <hr class="my-4">
             
-            <div class="text-center text-muted small">
-                <p class="mb-0">Credenciales de prueba:</p>
-                <p class="mb-0"><strong>admin</strong> / admin123</p>
-                <p><strong>usuario</strong> / usuario123</p>
-            </div>
         </div>
     </div>
     
