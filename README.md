@@ -63,6 +63,6 @@ Objetivo del proyecto
 
 Este proyecto fue desarrollado como sistema real para la gestión de un negocio de servicio técnico, con el objetivo de mejorar el control de clientes, seguimiento de servicios y organización del trabajo.
 
-💻 Autor
+Autor
 
 Desarrollado por Alex.
