@@ -178,4 +178,51 @@ class Orden extends Model
         $stmt = $this->db->query($sql);
         return $stmt->fetch();
     }
+
+    public function getReporteByFechas($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT o.*, c.nombre as cliente_nombre 
+                FROM ordenes o
+                JOIN clientes c ON o.cliente_id = c.id
+                WHERE o.fecha BETWEEN :inicio AND :fin
+                ORDER BY o.fecha DESC";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':inicio' => $fechaInicio, ':fin' => $fechaFin]);
+        return $stmt->fetchAll();
+    }
+
+    public function getResumenByFechas($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    COUNT(*) as total_ordenes,
+                    COUNT(CASE WHEN estado = 'pendiente' THEN 1 END) as pendientes,
+                    COUNT(CASE WHEN estado = 'realizada' THEN 1 END) as realizadas,
+                    COUNT(CASE WHEN estado = 'cancelada' THEN 1 END) as canceladas,
+                    COALESCE(SUM(CASE WHEN estado = 'realizada' THEN costo ELSE 0 END), 0) as total_ingresos
+                FROM ordenes
+                WHERE fecha BETWEEN :inicio AND :fin";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':inicio' => $fechaInicio, ':fin' => $fechaFin]);
+        return $stmt->fetch();
+    }
+
+    public function getIngresosMensuales($meses = 12)
+    {
+        $sql = "SELECT 
+                    DATE_FORMAT(fecha, '%Y-%m') as mes,
+                    COUNT(*) as cantidad,
+                    COALESCE(SUM(costo), 0) as ingresos
+                FROM ordenes
+                WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL :meses MONTH)
+                AND estado = 'realizada'
+                GROUP BY DATE_FORMAT(fecha, '%Y-%m')
+                ORDER BY mes ASC";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':meses', $meses, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

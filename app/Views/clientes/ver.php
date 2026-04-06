@@ -61,7 +61,6 @@
     </div>
 </div>
 
-<!-- Listado de órdenes existentes -->
 <h2><i class="fas fa-history"></i> Historial de Trabajos</h2>
 
 <?php if (empty($ordenes)): ?>

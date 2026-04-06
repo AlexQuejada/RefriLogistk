@@ -1,0 +1,13 @@
+.card {
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.table tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+.list-group-item:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}

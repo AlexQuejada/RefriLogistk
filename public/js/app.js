@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
 
-    //  La sidebar toogle para telefonitos
 
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
@@ -12,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Cerrar sidebar al hacer clic fuera en móvil
 
     document.addEventListener('click', function(event) {
         if (window.innerWidth < 768 && sidebar && sidebar.classList.contains('active')) {

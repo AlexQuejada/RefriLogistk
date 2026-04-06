@@ -55,8 +55,30 @@ class Cliente extends Model
     }
 
     public function getTotalCount()
-{
-    $stmt = $this->db->query("SELECT COUNT(*) as total FROM clientes");
-    return $stmt->fetch()['total'];
-}
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) as total FROM clientes");
+        return $stmt->fetch()['total'];
+    }
+
+    public function getTopClientes($limit = 10)
+    {
+        $sql = "SELECT 
+                    c.id,
+                    c.nombre,
+                    c.telefono,
+                    c.email,
+                    COUNT(o.id) as total_ordenes,
+                    COALESCE(SUM(o.costo), 0) as total_gastado
+                FROM clientes c
+                LEFT JOIN ordenes o ON c.id = o.cliente_id
+                WHERE o.estado = 'realizada' OR o.estado IS NULL
+                GROUP BY c.id
+                ORDER BY total_ordenes DESC, total_gastado DESC
+                LIMIT :limit";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

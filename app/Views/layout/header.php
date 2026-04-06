@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/RefriLogistk/public/css/app.css">
     <link href="/RefriLogistk/public/css/calendario.css" rel="stylesheet">
+    <link href="/RefriLogistk/public/css/dashboard.css" rel="stylesheet">
+    <link href="/RefriLogistk/public/css/reporte.css" rel="stylesheet">
 
     
     
@@ -36,11 +38,11 @@
                         Admin
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
+                        <li><a class="dropdown-item" href="/RefriLogistk/public/perfil"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
-                    </ul>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/RefriLogistk/public/logout"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
                 </div>
             </div>
         </div>
@@ -74,7 +76,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= $activePage === 'reportes' ? 'active' : '' ?>" href="#">
+                    <a class="sidebar-link <?= $activePage === 'reportes' ? 'active' : '' ?>" href="/RefriLogistk/public/reportes">
                         <i class="fas fa-file-alt"></i>
                         <span>Reportes</span>
                     </a>
@@ -82,8 +84,14 @@
             </ul>
             
             <div class="sidebar-divider"></div>
-            
+
             <ul class="list-unstyled">
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= $activePage === 'perfil' ? 'active' : '' ?>" href="/RefriLogistk/public/perfil">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Mi Perfil</span>
+                    </a>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="#">
                         <i class="fas fa-cog"></i>
@@ -91,7 +99,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link text-danger" href="#">
+                    <a class="sidebar-link text-danger" href="/RefriLogistk/public/logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Salir</span>
                     </a>

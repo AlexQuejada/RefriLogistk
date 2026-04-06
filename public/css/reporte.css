@@ -1,0 +1,57 @@
+@media print {
+    .btn, 
+    .card-header .btn, 
+    .sidebar, 
+    nav, 
+    .d-flex .btn-secondary,
+    .sidebar-toggle {
+        display: none !important;
+    }
+    
+    .sidebar, 
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .container-fluid {
+        padding: 0 !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+
+.table-striped tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+
+.medalla {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.3s ease;
+}
+
+canvas {
+    max-height: 400px;
+    width: 100%;
+}
