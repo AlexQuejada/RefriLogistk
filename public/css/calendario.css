@@ -1,0 +1,151 @@
+.estado-pendiente {
+    background-color: #ffc107;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.estado-realizada {
+    background-color: #198754;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.estado-cancelada {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.fc-event {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.fc-event:hover {
+    transform: scale(1.02);
+}
+
+.card-stats {
+    transition: transform 0.2s;
+}
+
+.card-stats:hover {
+    transform: translateY(-3px);
+}
+.estado-pendiente {
+    background-color: #ffc107;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.estado-realizada {
+    background-color: #198754;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.estado-cancelada {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+
+.fc-event {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none !important;
+    font-weight: 500;
+    padding: 2px 4px;
+}
+
+.fc-event:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+
+.fc-event-pendiente {
+    border-left: 4px solid #ffc107 !important;
+    background-color: #fff3cd !important;
+    color: #856404 !important;
+}
+
+
+.fc-event-realizada {
+    border-left: 4px solid #198754 !important;
+    background-color: #d1e7dd !important;
+    color: #0f5132 !important;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.fc-event-cancelada {
+    border-left: 4px solid #dc3545 !important;
+    background-color: #f8d7da !important;
+    color: #842029 !important;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.fc-event-title {
+    font-weight: 500;
+}
+
+.fc-timegrid-event {
+    border-radius: 6px !important;
+}
+
+.card-stats {
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.card-stats:hover {
+    transform: translateY(-3px);
+}
+
+.leyenda-calendario {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.leyenda-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.leyenda-color.pendiente { background-color: #ffc107; }
+.leyenda-color.realizada { background-color: #198754; }
+.leyenda-color.cancelada { background-color: #dc3545; }

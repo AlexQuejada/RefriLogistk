@@ -14,11 +14,11 @@
                 <h5 class="mb-0"><i class="fas fa-info-circle"></i> Información de la Orden</h5>
             </div>
             <div class="card-body">
-                <p><strong>📋 Descripción:</strong></p>
+                <p><strong>Descripción:</strong></p>
                 <p><?= nl2br(htmlspecialchars($orden['descripcion'])) ?></p>
                 <hr>
-                <p><strong>📅 Fecha:</strong> <?= date('d/m/Y', strtotime($orden['fecha'])) ?></p>
-                <p><strong>💰 Costo:</strong> <?= $orden['costo'] ? '$' . number_format($orden['costo'], 2) : 'No especificado' ?></p>
+                <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($orden['fecha'])) ?></p>
+                <p><strong>Costo:</strong> <?= $orden['costo'] ? '$' . number_format($orden['costo'], 2) : 'No especificado' ?></p>
             </div>
         </div>
     </div>

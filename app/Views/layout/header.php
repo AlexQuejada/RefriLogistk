@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/RefriLogistk/public/assets/image/icono-refrites.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/RefriLogistk/public/css/app.css">
+    <link href="/RefriLogistk/public/css/calendario.css" rel="stylesheet">
 
     
     
@@ -49,7 +50,7 @@
         <div class="sidebar-menu">
             <ul class="list-unstyled">
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= $activePage === 'dashboard' ? 'active' : '' ?>" href="/RefriLogistk/public/">
+                    <a class="sidebar-link <?= $activePage === 'dashboard' ? 'active' : '' ?>" href="/RefriLogistk/public/dashboard">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
                     </a>
@@ -67,7 +68,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= $activePage === 'calendario' ? 'active' : '' ?>" href="#">
+                    <a class="sidebar-link <?= $activePage === 'calendario' ? 'active' : '' ?>" href="/RefriLogistk/public/calendario">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Calendario</span>
                     </a>

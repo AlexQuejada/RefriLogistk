@@ -8,7 +8,6 @@ class Cliente extends Model
 {
     protected $table = 'clientes';
 
-    /* Crear un nuevo cliente*/
     public function create($data)
     {
         $sql = "INSERT INTO clientes (nombre, telefono, email, direccion) 
@@ -23,7 +22,6 @@ class Cliente extends Model
         ]);
     }
 
-    /* Actualizar cliente*/
     public function update($id, $data)
     {
         $sql = "UPDATE clientes 
@@ -41,7 +39,6 @@ class Cliente extends Model
     }
 
 
-    /* Obtener cliente con resumen de sus órdenes*/
     public function getWithSummary($id)
     {
         $sql = "SELECT c.*, 
@@ -56,4 +53,10 @@ class Cliente extends Model
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
+
+    public function getTotalCount()
+{
+    $stmt = $this->db->query("SELECT COUNT(*) as total FROM clientes");
+    return $stmt->fetch()['total'];
+}
 }
