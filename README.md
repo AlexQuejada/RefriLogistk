@@ -26,6 +26,7 @@ Arquitectura del proyecto
 El proyecto sigue una estructura MVC básica:
 
 app/
+
  ├── Config
  
  ├── Controllers
@@ -37,6 +38,7 @@ app/
  └── Views
 
 public/
+
  ├── css
  
  ├── js
