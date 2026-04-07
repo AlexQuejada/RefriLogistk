@@ -51,9 +51,6 @@ Clientes
 Órdenes de servicio
 Dashboard
 Calendario de servicios
-
-Próximas funcionalidades
-
 Sistema de login y autenticación
 Exportación de reportes (Excel / PDF)
 Configuración de cuenta
