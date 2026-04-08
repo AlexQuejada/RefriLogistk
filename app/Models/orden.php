@@ -32,18 +32,24 @@ class Orden extends Model
     }
 
     public function create($data)
-    {
-        $sql = "INSERT INTO ordenes (cliente_id, fecha, descripcion, costo) 
-                VALUES (:cliente_id, :fecha, :descripcion, :costo)";
-        
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
-            ':cliente_id' => $data['cliente_id'],
-            ':fecha' => $data['fecha'],
-            ':descripcion' => $data['descripcion'],
-            ':costo' => $data['costo'] ?? null
-        ]);
-    }
+{
+    // Determinar estado según la fecha
+    $fechaOrden = new \DateTime($data['fecha']);
+    $hoy = new \DateTime();
+    $estado = ($fechaOrden < $hoy) ? 'realizada' : 'pendiente';
+    
+    $sql = "INSERT INTO ordenes (cliente_id, fecha, descripcion, costo, estado) 
+            VALUES (:cliente_id, :fecha, :descripcion, :costo, :estado)";
+    
+    $stmt = $this->db->prepare($sql);
+    return $stmt->execute([
+        ':cliente_id' => $data['cliente_id'],
+        ':fecha' => $data['fecha'],
+        ':descripcion' => $data['descripcion'],
+        ':costo' => $data['costo'] ?? null,
+        ':estado' => $estado
+    ]);
+}
 
     public function getByCliente($clienteId)
     {

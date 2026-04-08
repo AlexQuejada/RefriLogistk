@@ -10,12 +10,13 @@ class Cliente extends Model
 
     public function create($data)
     {
-        $sql = "INSERT INTO clientes (nombre, telefono, email, direccion) 
-                VALUES (:nombre, :telefono, :email, :direccion)";
+        $sql = "INSERT INTO clientes (nombre, tipo_cliente, telefono, email, direccion) 
+                VALUES (:nombre, :tipo_cliente, :telefono, :email, :direccion)";
         
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':nombre' => $data['nombre'],
+            ':tipo_cliente' => $data['tipo_cliente'] ?? 'particular',
             ':telefono' => $data['telefono'] ?? null,
             ':email' => $data['email'] ?? null,
             ':direccion' => $data['direccion'] ?? null
@@ -25,18 +26,45 @@ class Cliente extends Model
     public function update($id, $data)
     {
         $sql = "UPDATE clientes 
-                SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion 
+                SET nombre = :nombre, tipo_cliente = :tipo_cliente , telefono = :telefono, email = :email, direccion = :direccion 
                 WHERE id = :id";
         
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $id,
             ':nombre' => $data['nombre'],
+            ':tipo_cliente' => $data['tipo_cliente'] ?? 'particular',
             ':telefono' => $data['telefono'] ?? null,
             ':email' => $data['email'] ?? null,
             ':direccion' => $data['direccion'] ?? null
         ]);
     }
+
+public function buscarPorNombre($term, $limit = 10, $offset = 0)
+{
+    $sql = "SELECT id, nombre, telefono, direccion 
+            FROM clientes 
+            WHERE nombre LIKE :term 
+            ORDER BY nombre ASC 
+            LIMIT :limit OFFSET :offset";
+    
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':term', '%' . $term . '%', \PDO::PARAM_STR);
+    $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll();
+}
+
+public function contarBusqueda($term)
+{
+    $sql = "SELECT COUNT(*) as total FROM clientes WHERE nombre LIKE :term";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([':term' => '%' . $term . '%']);
+    
+    return $stmt->fetch()['total'];
+}
 
 
     public function getWithSummary($id)

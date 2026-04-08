@@ -12,6 +12,14 @@
                 <h5>Información de Contacto</h5>
             </div>
             <div class="card-body">
+                <p>
+                    <strong>Tipo:</strong>
+                        <?php if (($cliente['tipo_cliente'] ?? 'particular') == 'particular'): ?>
+                            <span class="badge bg-info">👤 Particular</span>
+                        <?php else: ?>
+                            <span class="badge bg-primary">🏢 Inmobiliaria</span>
+                        <?php endif; ?>
+                </p>
                 <p><strong>Teléfono:</strong> <?= htmlspecialchars($cliente['telefono'] ?: 'No especificado') ?></p>
                 <p><strong>Email:</strong> <?= htmlspecialchars($cliente['email'] ?: 'No especificado') ?></p>
                 <p><strong>Dirección:</strong> <?= htmlspecialchars($cliente['direccion'] ?: 'No especificada') ?></p>

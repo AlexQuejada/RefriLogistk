@@ -23,6 +23,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Tipo de cliente</th>
                     <th>Teléfono</th>
                     <th>Email</th>
                     <th>Acciones</th>
@@ -32,6 +33,17 @@
                 <?php foreach ($clientes as $cliente): ?>
                 <tr>
                     <td><?= $cliente['id'] ?></td>
+                    <td>
+                        <?php if (($cliente['tipo_cliente'] ?? 'particular') == 'particular'): ?>
+                            <span class="badge bg-info">
+                                <i class="fas fa-user"></i> Particular
+                            </span>
+                        <?php else: ?>
+                            <span class="badge bg-primary">
+                                <i class="fas fa-building"></i> Inmobiliaria
+                            </span>
+                        <?php endif; ?>
+                    </td>
                     <td><?= htmlspecialchars($cliente['nombre']) ?></td>
                     <td><?= htmlspecialchars($cliente['telefono'] ?: '-') ?></td>
                     <td><?= htmlspecialchars($cliente['email'] ?: '-') ?></td>

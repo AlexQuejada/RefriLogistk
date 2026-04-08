@@ -13,6 +13,17 @@
                         <input type="text" name="nombre" class="form-control" value="<?= htmlspecialchars($cliente['nombre']) ?>" required>
                     </div>
                     <div class="mb-3">
+                        <label for="tipo_cliente" class="form-label">Tipo de cliente</label>
+                        <select class="form-select" id="tipo_cliente" name="tipo_cliente" required>
+                            <option value="particular" <?= (($cliente['tipo_cliente'] ?? 'particular') == 'particular') ? 'selected' : '' ?>>
+                                👤 Particular
+                            </option>
+                            <option value="inmobiliaria" <?= (($cliente['tipo_cliente'] ?? '') == 'inmobiliaria') ? 'selected' : '' ?>>
+                                🏢 Inmobiliaria
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Teléfono</label>
                         <input type="text" name="telefono" class="form-control" value="<?= htmlspecialchars($cliente['telefono']) ?>">
                     </div>

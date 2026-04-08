@@ -38,6 +38,36 @@ class OrdenController extends Controller
         ]);
     }
 
+    public function cambiarEstado()
+    {
+        // Verificar autenticación
+        $this->requireAuth();
+        
+        // Solo POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'error' => 'Método no permitido']);
+            return;
+        }
+        
+        // Obtener datos
+        $id = $_POST['id'] ?? 0;
+        $estado = $_POST['estado'] ?? '';
+        
+        // Validar
+        $estadosValidos = ['pendiente', 'realizada', 'cancelada'];
+        if (!$id || !in_array($estado, $estadosValidos)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'error' => 'Datos inválidos']);
+            return;
+        }
+        
+        // Cambiar estado
+        $result = $this->ordenModel->cambiarEstado($id, $estado);
+        
+        header('Content-Type: application/json');
+        echo json_encode(['success' => $result]);
+    }
 
     public function store()
     {

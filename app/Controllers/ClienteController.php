@@ -74,22 +74,54 @@ class ClienteController extends Controller
         ]);
     }
 
-
-    public function edit($id)
-    {
-        $cliente = $this->clienteModel->find($id);
-        
-        if (!$cliente) {
-            $_SESSION['error'] = 'Cliente no encontrado';
-            $this->redirect('/RefriLogistk/public/clientes');
-        }
-        
-        $this->view('clientes/editar', [
-            'cliente' => $cliente,
-            'title' => 'Editar Cliente'
-        ]);
+public function buscar()
+{
+    $this->requireAuth();
+    
+    $term = $_GET['term'] ?? '';
+    $page = (int)($_GET['page'] ?? 1);
+    $limit = 10;
+    $offset = ($page - 1) * $limit;
+    
+    if (strlen($term) < 2) {
+        echo json_encode(['items' => [], 'more' => false]);
+        return;
     }
+    
+    $clientes = $this->clienteModel->buscarPorNombre($term, $limit, $offset);
+    $total = $this->clienteModel->contarBusqueda($term);
+    
+    $items = [];
+    foreach ($clientes as $cliente) {
+        $items[] = [
+            'id' => $cliente['id'],
+            'nombre' => $cliente['nombre'],
+            'telefono' => $cliente['telefono'] ?? '',
+            'direccion' => $cliente['direccion'] ?? ''
+        ];
+    }
+    
+    echo json_encode([
+        'items' => $items,
+        'more' => ($offset + $limit) < $total
+    ]);
+}
 
+public function edit($id)
+{
+    $this->requireAuth();
+    
+    $cliente = $this->clienteModel->find($id);
+    
+    if (!$cliente) {
+        $_SESSION['error'] = 'Cliente no encontrado';
+        $this->redirect('/RefriLogistk/public/clientes');
+    }
+    $this->view('clientes/editar', [
+        'cliente' => $cliente, 
+        'title' => 'Editar Cliente'
+    ]);
+}
 
     public function update($id)
     {

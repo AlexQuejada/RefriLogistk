@@ -82,6 +82,10 @@ if ($path === 'dashboard') {
     $controller = new ClienteController();
     $controller->index();
     
+} elseif ($path === 'clientes/buscar' && $requestMethod === 'GET') {
+    $controller = new ClienteController();
+    $controller->buscar();
+
 } elseif ($path === 'clientes/nuevo') {
     $controller = new ClienteController();
 
@@ -108,6 +112,10 @@ if ($path === 'dashboard') {
     $controller = new ClienteController();
     $controller->destroy($matches[1]);
     
+} elseif ($path === 'ordenes/cambiar-estado' && $requestMethod === 'POST') {
+    $controller = new OrdenController();
+    $controller->cambiarEstado();
+
 } elseif ($path === 'ordenes') {
     $controller = new OrdenController();
     $controller->index();

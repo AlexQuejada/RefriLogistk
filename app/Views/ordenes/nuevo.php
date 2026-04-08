@@ -9,15 +9,9 @@
             <div class="card-body">
                 <form action="/RefriLogistk/public/ordenes/nuevo" method="POST">
                     <div class="mb-3">
-                        <label class="form-label">Cliente *</label>
-                        <select name="cliente_id" class="form-control" required>
-                            <option value="">Seleccione un cliente</option>
-                            <?php foreach ($clientes as $cliente): ?>
-                                <option value="<?= $cliente['id'] ?>">
-                                    <?= htmlspecialchars($cliente['nombre']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <label for="cliente_id" class="form-label">Cliente</label>
+                        <small class="form-text text-muted" id="cliente_id" name="cliente_id" required>
+                        </small>
                     </div>
                     
                     <div class="mb-3">
