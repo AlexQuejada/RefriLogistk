@@ -17,7 +17,10 @@
                 <p><strong>Descripción:</strong></p>
                 <p><?= nl2br(htmlspecialchars($orden['descripcion'])) ?></p>
                 <hr>
-                <p><strong>Fecha:</strong> <?= date('d/m/Y', strtotime($orden['fecha'])) ?></p>
+                <p><strong>Fecha:</strong> <?= date('d/m/Y H:i', strtotime($orden['fecha'])) ?></p>
+                <p><strong>Precio normal:</strong> $<?= number_format($orden['precio_normal'] ?? 0, 2) ?></p>
+                <p> <strong>Descuento:</strong> <span class="text-success">-$<?= number_format($orden['descuento'] ?? 0, 2) ?></span></p>
+                <p><strong>Precio final:</strong> <span class="fw-bold">$<?= number_format($orden['costo'] ?? 0, 2) ?></span></p>
                 <p><strong>Costo:</strong> <?= $orden['costo'] ? '$' . number_format($orden['costo'], 2) : 'No especificado' ?></p>
             </div>
         </div>

@@ -71,14 +71,39 @@ class OrdenController extends Controller
 
     public function store()
     {
+        $this->requireAuth();
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/RefriLogistk/public/ordenes');
+            $this->redirect('/RefriLogistk/public/ordenes/nuevo');
         }
-
-        $result = $this->ordenModel->create($_POST);
+        
+        $precioNormal = $_POST['precio_normal'] ?? null;
+        $descuento = $_POST['descuento'] ?? null;
+        
+        // El precio final se calcula o viene del formulario
+        $precioFinal = $_POST['precio_final'] ?? null;
+        
+        // Si no enviaron precio_final, lo calculamos
+        if ($precioFinal === null && $precioNormal !== null && $descuento !== null) {
+            $precioFinal = $precioNormal - $descuento;
+        }
+        
+        // IMPORTANTE: costo = precio_final
+        $costo = $precioFinal;
+        
+        $data = [
+            'cliente_id' => $_POST['cliente_id'],
+            'fecha' => $_POST['fecha'],
+            'descripcion' => $_POST['descripcion'],
+            'precio_normal' => $precioNormal,
+            'descuento' => $descuento,
+            'costo' => $costo  // ← Guarda lo mismo que precio_final
+        ];
+        
+        $result = $this->ordenModel->create($data);
         
         if ($result) {
-            $_SESSION['success'] = 'Orden de servicio creada exitosamente';
+            $_SESSION['success'] = 'Orden creada correctamente';
             $this->redirect('/RefriLogistk/public/ordenes');
         } else {
             $_SESSION['error'] = 'Error al crear la orden';
@@ -124,29 +149,42 @@ class OrdenController extends Controller
 
     public function update($id)
     {
+        $this->requireAuth();
+        
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/RefriLogistk/public/ordenes');
+            $this->redirect('/RefriLogistk/public/ordenes/editar/' . $id);
         }
         
-        $orden = $this->ordenModel->find($id);
+        $precioNormal = $_POST['precio_normal'] ?? null;
+        $descuento = $_POST['descuento'] ?? null;
+        $precioFinal = $_POST['precio_final'] ?? null;
         
-        if (!$orden) {
-            $_SESSION['error'] = 'Orden no encontrada';
-            $this->redirect('/RefriLogistk/public/ordenes');
+        if ($precioFinal === null && $precioNormal !== null && $descuento !== null) {
+            $precioFinal = $precioNormal - $descuento;
         }
         
-        $result = $this->ordenModel->update($id, $_POST);
+        // costo = precio_final
+        $costo = $precioFinal;
+        
+        $data = [
+            'cliente_id' => $_POST['cliente_id'],
+            'fecha' => $_POST['fecha'],
+            'descripcion' => $_POST['descripcion'],
+            'precio_normal' => $precioNormal,
+            'descuento' => $descuento,
+            'costo' => $costo
+        ];
+        
+        $result = $this->ordenModel->update($id, $data);
         
         if ($result) {
-            $_SESSION['success'] = 'Orden actualizada exitosamente';
+            $_SESSION['success'] = 'Orden actualizada correctamente';
         } else {
             $_SESSION['error'] = 'Error al actualizar la orden';
         }
         
         $this->redirect('/RefriLogistk/public/ordenes');
     }
-
-
     public function destroy($id)
     {
         $orden = $this->ordenModel->find($id);

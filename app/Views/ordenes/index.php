@@ -20,6 +20,9 @@
                     <th>ID</th>
                     <th>Cliente</th>
                     <th>Descripción</th>
+                    <th>Precio normal</th>
+                    <th>Descuento</th>
+                    <th>Precio final</th>
                     <th>Fecha</th>
                     <th>Costo</th>
                     <th>Estado</th>        
@@ -36,7 +39,10 @@
                         </a>
                     </td>
                     <td><?= htmlspecialchars(substr($orden['descripcion'], 0, 50)) ?><?= strlen($orden['descripcion']) > 50 ? '...' : '' ?></td>
-                    <td><?= date('d/m/Y', strtotime($orden['fecha'])) ?></td>
+                    <td class="text-end">$<?= number_format($orden['precio_normal'] ?? 0, 2) ?></td>
+                    <td class="text-end text-success">-$<?= number_format($orden['descuento'] ?? 0, 2) ?></td>
+                    <td class="text-end fw-bold">$<?= number_format($orden['costo'] ?? 0, 2) ?></td>
+                    <td><?= date('d/m/Y H:i', strtotime($orden['fecha'])) ?></td>
                     <td><?= $orden['costo'] ? '$' . number_format($orden['costo'], 2) : '-' ?></td>
                     <td>
                         <select class="form-select form-select-sm estado-selector d-inline-block w-auto me-1" 

@@ -32,24 +32,25 @@ class Orden extends Model
     }
 
     public function create($data)
-{
-    // Determinar estado según la fecha
-    $fechaOrden = new \DateTime($data['fecha']);
-    $hoy = new \DateTime();
-    $estado = ($fechaOrden < $hoy) ? 'realizada' : 'pendiente';
-    
-    $sql = "INSERT INTO ordenes (cliente_id, fecha, descripcion, costo, estado) 
-            VALUES (:cliente_id, :fecha, :descripcion, :costo, :estado)";
-    
-    $stmt = $this->db->prepare($sql);
-    return $stmt->execute([
-        ':cliente_id' => $data['cliente_id'],
-        ':fecha' => $data['fecha'],
-        ':descripcion' => $data['descripcion'],
-        ':costo' => $data['costo'] ?? null,
-        ':estado' => $estado
-    ]);
-}
+    {
+        $fechaOrden = new \DateTime($data['fecha']);
+        $hoy = new \DateTime();
+        $estado = ($fechaOrden < $hoy) ? 'realizada' : 'pendiente';
+        
+        $sql = "INSERT INTO ordenes (cliente_id, fecha, descripcion, precio_normal, descuento, costo, estado) 
+                VALUES (:cliente_id, :fecha, :descripcion, :precio_normal, :descuento, :costo, :estado)";
+        
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':cliente_id' => $data['cliente_id'],
+            ':fecha' => $data['fecha'],
+            ':descripcion' => $data['descripcion'],
+            ':precio_normal' => $data['precio_normal'] ?? null,
+            ':descuento' => $data['descuento'] ?? null,
+            ':costo' => $data['costo'] ?? null,
+            ':estado' => $estado
+        ]);
+    }
 
     public function getByCliente($clienteId)
     {
@@ -62,14 +63,22 @@ class Orden extends Model
     public function update($id, $data)
     {
         $sql = "UPDATE ordenes 
-                SET fecha = :fecha, descripcion = :descripcion, costo = :costo 
+                SET cliente_id = :cliente_id,
+                    fecha = :fecha, 
+                    descripcion = :descripcion,
+                    precio_normal = :precio_normal,
+                    descuento = :descuento,
+                    costo = :costo
                 WHERE id = :id";
         
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':id' => $id,
+            ':cliente_id' => $data['cliente_id'],
             ':fecha' => $data['fecha'],
             ':descripcion' => $data['descripcion'],
+            ':precio_normal' => $data['precio_normal'] ?? null,
+            ':descuento' => $data['descuento'] ?? null,
             ':costo' => $data['costo'] ?? null
         ]);
     }

@@ -96,3 +96,20 @@ function formatCliente(cliente) {
 function formatClienteSelection(cliente) {
     return cliente.nombre || cliente.text;  // Solo el nombre seleccionado
 }
+
+function calcularPrecioFinal() {
+    const precioNormal = parseFloat($('#precio_normal').val()) || 0;
+    const descuento = parseFloat($('#descuento').val()) || 0;
+    const precioFinal = precioNormal - descuento;
+    
+    if (precioFinal >= 0) {
+        $('#precio_final').val(precioFinal.toFixed(2));
+    } else {
+        $('#precio_final').val(0);
+        alert('El descuento no puede ser mayor al precio normal');
+    }
+}
+
+$(document).ready(function() {
+    $('#precio_normal, #descuento').on('input', calcularPrecioFinal);
+});
